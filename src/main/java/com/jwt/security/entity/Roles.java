@@ -18,15 +18,6 @@ public class Roles extends BaseEntity {
     @Column(name = "name")
     String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tbl_role_permissions",
-            joinColumns = @jakarta.persistence.JoinColumn(name = "role_id"),
-            inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "permission_id")
-    )
-    Set<Permission> permissions;
-
-
     @ManyToMany(mappedBy = "roles")
     Set<User> users;
 }

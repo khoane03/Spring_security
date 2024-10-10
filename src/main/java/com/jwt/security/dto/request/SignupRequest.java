@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class PermissionRequest {
-    String name;
-    String description;
+public class SignupRequest {
+    String username;
+    String password;
 }

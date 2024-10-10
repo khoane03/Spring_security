@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface RolesService {
     RolesResponse createRole(RolesRequest request);
+
     List<RolesResponse> getAll();
+
     boolean deleteRole(String name);
 
 }

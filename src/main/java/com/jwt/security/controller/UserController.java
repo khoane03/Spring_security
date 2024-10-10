@@ -2,6 +2,7 @@ package com.jwt.security.controller;
 
 
 import com.jwt.security.dto.request.UserRequest;
+import com.jwt.security.dto.request.UserUpdateRequest;
 import com.jwt.security.dto.response.ApiResponse;
 import com.jwt.security.service.UserService;
 import jakarta.validation.Valid;
@@ -36,20 +37,48 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/my_info")
+    public ApiResponse<?> getMyInfo() {
+        return ApiResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("My info fetched successfully")
+                .data(userService.getMyInfo())
+                .build();
+    }
+
+
     @PostMapping("/{id}")
     public ApiResponse<?> searchUserById(@PathVariable Integer id) {
         return ApiResponse.builder()
                 .code(HttpStatus.OK.value())
                 .message("User fetched successfully")
-                .data(userService.searchUserById(id))
+                .data(userService.getUserById(id))
                 .build();
     }
-    @DeleteMapping("/{id}")
-    public ApiResponse<?> deleteUserById(@PathVariable Integer id){
+    @PostMapping("/lock/{id}")
+    public ApiResponse<?> lockUser(@PathVariable Integer id){
         return ApiResponse.builder()
                 .code(HttpStatus.OK.value())
                 .message("Deletion of " + id +" successfully")
-                .data(userService.deleteById(id))
+                .data(userService.lockUserById(id))
+                .build();
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse<?> updateUser(@PathVariable Integer id, @Valid @RequestBody UserUpdateRequest userRequest) {
+        return ApiResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("User updated successfully")
+                .data(userService.updateUserById(id, userRequest))
+                .build();
+    }
+
+    @PutMapping("/status/{id}")
+    public ApiResponse<?> editStatusUser(@PathVariable Integer id, @RequestParam String status) {
+        return ApiResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("User status updated successfully")
+                .data(userService.editStatusUser(status, id))
                 .build();
     }
 

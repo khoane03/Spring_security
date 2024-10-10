@@ -11,16 +11,11 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class UserRequest {
-    @NotNull(message = "Name is required")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserUpdateRequest {
+
     String fullName;
 
-    @NotBlank(message = "Username is required")
-    @Size(min = 6, message = "Username must be at least 6 characters")
-    String username;
-
-    @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Password must contain at least one uppercase letter, one lowercase letter, and one number")
     String password;
